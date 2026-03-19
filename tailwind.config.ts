@@ -47,6 +47,26 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        pokemon: {
+          water: "hsl(var(--pokemon-water))",
+          fire: "hsl(var(--pokemon-fire))",
+          grass: "hsl(var(--pokemon-grass))",
+          electric: "hsl(var(--pokemon-electric))",
+          psychic: "hsl(var(--pokemon-psychic))",
+          ice: "hsl(var(--pokemon-ice))",
+          dragon: "hsl(var(--pokemon-dragon))",
+          dark: "hsl(var(--pokemon-dark))",
+          fairy: "hsl(var(--pokemon-fairy))",
+          fighting: "hsl(var(--pokemon-fighting))",
+          flying: "hsl(var(--pokemon-flying))",
+          poison: "hsl(var(--pokemon-poison))",
+          ground: "hsl(var(--pokemon-ground))",
+          rock: "hsl(var(--pokemon-rock))",
+          bug: "hsl(var(--pokemon-bug))",
+          ghost: "hsl(var(--pokemon-ghost))",
+          steel: "hsl(var(--pokemon-steel))",
+          normal: "hsl(var(--pokemon-normal))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,25 +85,28 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "bounce-in": {
+          "0%": { transform: "scale(0)", opacity: "0" },
+          "50%": { transform: "scale(1.1)" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "bounce-in": "bounce-in 0.5s ease-out",
+        "float": "float 3s ease-in-out infinite",
       },
     },
   },
