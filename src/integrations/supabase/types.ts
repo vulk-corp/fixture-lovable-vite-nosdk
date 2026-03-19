@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      saved_pokemon: {
+        Row: {
+          attack: number | null
+          defense: number | null
+          height: number | null
+          hp: number | null
+          id: string
+          name: string
+          pokedex_number: number
+          saved_at: string
+          speed: number | null
+          sprite_url: string
+          types: string[]
+          weight: number | null
+        }
+        Insert: {
+          attack?: number | null
+          defense?: number | null
+          height?: number | null
+          hp?: number | null
+          id?: string
+          name: string
+          pokedex_number: number
+          saved_at?: string
+          speed?: number | null
+          sprite_url: string
+          types?: string[]
+          weight?: number | null
+        }
+        Update: {
+          attack?: number | null
+          defense?: number | null
+          height?: number | null
+          hp?: number | null
+          id?: string
+          name?: string
+          pokedex_number?: number
+          saved_at?: string
+          speed?: number | null
+          sprite_url?: string
+          types?: string[]
+          weight?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
