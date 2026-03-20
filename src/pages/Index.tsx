@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { fetchPokemon, fetchPokemonList, PokemonData } from "@/lib/pokemon-api";
 import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonDetail } from "@/components/PokemonDetail";
+import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 
 type ViewMode = "all" | "saved";
@@ -145,6 +146,8 @@ export default function Index() {
         onToggleSave={toggleSave}
         onClose={() => setSelected(null)}
       />
+
+      <Footer />
     </div>
   );
 }
