@@ -146,6 +146,8 @@ export default function Index() {
         onToggleSave={toggleSave}
         onClose={() => setSelected(null)}
       />
+
+      <Footer />
     </div>
   );
 }
