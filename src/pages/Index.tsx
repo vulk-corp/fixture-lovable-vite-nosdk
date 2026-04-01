@@ -1,12 +1,14 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, BookOpen, Grid3X3 } from "lucide-react";
+import { Search, BookOpen, Grid3X3, Shuffle } from "lucide-react";
 import { motion } from "framer-motion";
 import { fetchPokemon, fetchPokemonList, PokemonData } from "@/lib/pokemon-api";
 import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonDetail } from "@/components/PokemonDetail";
 import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 type ViewMode = "all" | "saved";
 
