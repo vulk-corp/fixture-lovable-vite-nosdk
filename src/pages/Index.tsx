@@ -130,6 +130,28 @@ export default function Index() {
         </div>
       </header>
 
+      {/* Last Generated Team */}
+      {lastTeam && (
+        <div className="container mx-auto px-4 pt-6">
+          <div className="rounded-lg border border-border bg-secondary/50 p-4">
+            <h2 className="mb-3 font-display text-sm text-foreground tracking-wide">YOUR RANDOM TEAM</h2>
+            <div className="flex flex-wrap gap-3">
+              {lastTeam.pokemon_names.map((name, i) => (
+                <div key={i} className="flex items-center gap-2 rounded-md border border-border bg-background px-3 py-2">
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${lastTeam.pokemon_ids[i]}.png`}
+                    alt={name}
+                    className="h-8 w-8"
+                  />
+                  <span className="text-sm font-medium capitalize text-foreground">{name}</span>
+                  <span className="text-xs text-muted-foreground">#{lastTeam.pokemon_ids[i]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Content */}
       <main className="container mx-auto px-4 py-8">
         {isLoading ? (
