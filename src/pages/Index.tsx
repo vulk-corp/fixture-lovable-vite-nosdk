@@ -1,12 +1,14 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, BookOpen, Grid3X3 } from "lucide-react";
+import { Search, BookOpen, Grid3X3, Shuffle } from "lucide-react";
 import { motion } from "framer-motion";
 import { fetchPokemon, fetchPokemonList, PokemonData } from "@/lib/pokemon-api";
 import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonDetail } from "@/components/PokemonDetail";
 import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 type ViewMode = "all" | "saved";
 
@@ -14,7 +16,23 @@ export default function Index() {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<PokemonData | null>(null);
   const [view, setView] = useState<ViewMode>("all");
+  const [generatingTeam, setGeneratingTeam] = useState(false);
+  const [lastTeam, setLastTeam] = useState<{ pokemon_ids: number[]; pokemon_names: string[] } | null>(null);
   const { savedPokemon, savedIds, toggleSave } = useSavedPokemon();
+
+  const handleGenerateTeam = async () => {
+    setGeneratingTeam(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-team");
+      if (error) throw error;
+      setLastTeam(data);
+      toast.success("Random team generated!");
+    } catch {
+      toast.error("Failed to generate team");
+    } finally {
+      setGeneratingTeam(false);
+    }
+  };
 
   const { data: allPokemon = [], isLoading } = useQuery({
     queryKey: ["pokemon-list"],
@@ -87,6 +105,16 @@ export default function Index() {
               </button>
             </div>
 
+            {/* Generate Team */}
+            <button
+              onClick={handleGenerateTeam}
+              disabled={generatingTeam}
+              className="flex items-center gap-1.5 rounded-lg border border-border bg-secondary px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-accent disabled:opacity-50"
+            >
+              <Shuffle className="h-3.5 w-3.5" />
+              {generatingTeam ? "Generating..." : "Random Team"}
+            </button>
+
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -101,6 +129,28 @@ export default function Index() {
           </div>
         </div>
       </header>
+
+      {/* Last Generated Team */}
+      {lastTeam && (
+        <div className="container mx-auto px-4 pt-6">
+          <div className="rounded-lg border border-border bg-secondary/50 p-4">
+            <h2 className="mb-3 font-display text-sm text-foreground tracking-wide">YOUR RANDOM TEAM</h2>
+            <div className="flex flex-wrap gap-3">
+              {lastTeam.pokemon_names.map((name, i) => (
+                <div key={i} className="flex items-center gap-2 rounded-md border border-border bg-background px-3 py-2">
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${lastTeam.pokemon_ids[i]}.png`}
+                    alt={name}
+                    className="h-8 w-8"
+                  />
+                  <span className="text-sm font-medium capitalize text-foreground">{name}</span>
+                  <span className="text-xs text-muted-foreground">#{lastTeam.pokemon_ids[i]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Content */}
       <main className="container mx-auto px-4 py-8">
