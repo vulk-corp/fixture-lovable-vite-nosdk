@@ -16,7 +16,23 @@ export default function Index() {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<PokemonData | null>(null);
   const [view, setView] = useState<ViewMode>("all");
+  const [generatingTeam, setGeneratingTeam] = useState(false);
+  const [lastTeam, setLastTeam] = useState<{ pokemon_ids: number[]; pokemon_names: string[] } | null>(null);
   const { savedPokemon, savedIds, toggleSave } = useSavedPokemon();
+
+  const handleGenerateTeam = async () => {
+    setGeneratingTeam(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-team");
+      if (error) throw error;
+      setLastTeam(data);
+      toast.success("Random team generated!");
+    } catch {
+      toast.error("Failed to generate team");
+    } finally {
+      setGeneratingTeam(false);
+    }
+  };
 
   const { data: allPokemon = [], isLoading } = useQuery({
     queryKey: ["pokemon-list"],
