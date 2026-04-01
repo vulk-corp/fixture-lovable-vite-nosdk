@@ -105,6 +105,16 @@ export default function Index() {
               </button>
             </div>
 
+            {/* Generate Team */}
+            <button
+              onClick={handleGenerateTeam}
+              disabled={generatingTeam}
+              className="flex items-center gap-1.5 rounded-lg border border-border bg-secondary px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-accent disabled:opacity-50"
+            >
+              <Shuffle className="h-3.5 w-3.5" />
+              {generatingTeam ? "Generating..." : "Random Team"}
+            </button>
+
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
