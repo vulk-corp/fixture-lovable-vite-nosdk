@@ -59,6 +59,27 @@ export type Database = {
         }
         Relationships: []
       }
+      teams: {
+        Row: {
+          created_at: string
+          id: string
+          pokemon_ids: number[]
+          pokemon_names: string[]
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          pokemon_ids: number[]
+          pokemon_names?: string[]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          pokemon_ids?: number[]
+          pokemon_names?: string[]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
