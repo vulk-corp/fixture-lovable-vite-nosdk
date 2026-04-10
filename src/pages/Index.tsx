@@ -9,15 +9,15 @@ import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { launchkit } from "@/main";
+import { check, getGateUrl } from "@bworlds/launchkit";
 
 type ViewMode = "all" | "saved";
 
 export default function Index() {
   useEffect(() => {
-    launchkit.check().then((session) => {
+    check().then((session) => {
       if (!session.valid) {
-        window.location.href = launchkit.getGateUrl();
+        window.location.href = getGateUrl();
       }
     });
   }, []);
