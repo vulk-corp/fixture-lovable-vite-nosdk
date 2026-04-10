@@ -9,21 +9,18 @@ import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import * as launchkit from "@bworlds/launchkit";
+// @ts-ignore — named exports available in @bworlds/launchkit >=1.1.0
+import { check, getGateUrl } from "@bworlds/launchkit";
 
 type ViewMode = "all" | "saved";
 
 export default function Index() {
   useEffect(() => {
-    const checkFn = (launchkit as any).check;
-    const gateFn = (launchkit as any).getGateUrl;
-    if (typeof checkFn === "function") {
-      checkFn().then((session: any) => {
-        if (!session.valid && typeof gateFn === "function") {
-          window.location.href = gateFn();
-        }
-      });
-    }
+    check().then((session: any) => {
+      if (!session.valid) {
+        window.location.href = getGateUrl();
+      }
+    });
   }, []);
 
   const [search, setSearch] = useState("");
