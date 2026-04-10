@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, BookOpen, Grid3X3, Shuffle } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,10 +9,19 @@ import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { launchkit } from "@/main";
 
 type ViewMode = "all" | "saved";
 
 export default function Index() {
+  useEffect(() => {
+    launchkit.check().then((session) => {
+      if (!session.valid) {
+        window.location.href = launchkit.getGateUrl();
+      }
+    });
+  }, []);
+
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<PokemonData | null>(null);
   const [view, setView] = useState<ViewMode>("all");
