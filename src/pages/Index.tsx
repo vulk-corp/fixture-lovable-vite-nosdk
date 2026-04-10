@@ -9,17 +9,21 @@ import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { check, getGateUrl } from "@bworlds/launchkit";
+import * as launchkit from "@bworlds/launchkit";
 
 type ViewMode = "all" | "saved";
 
 export default function Index() {
   useEffect(() => {
-    check().then((session) => {
-      if (!session.valid) {
-        window.location.href = getGateUrl();
-      }
-    });
+    const checkFn = (launchkit as any).check;
+    const gateFn = (launchkit as any).getGateUrl;
+    if (typeof checkFn === "function") {
+      checkFn().then((session: any) => {
+        if (!session.valid && typeof gateFn === "function") {
+          window.location.href = gateFn();
+        }
+      });
+    }
   }, []);
 
   const [search, setSearch] = useState("");
