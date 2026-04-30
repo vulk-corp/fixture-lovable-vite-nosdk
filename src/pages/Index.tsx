@@ -51,20 +51,7 @@ export default function Index() {
       const details = await Promise.all(
         list.map((_, i) => fetchPokemon(i + 1))
       );
-      // Custom #152 — Lovaboo, the Lovable mascot Pokémon
-      const customEntry: PokemonData = {
-        id: 152,
-        name: "lovaboo",
-        sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png",
-        types: ["psychic", "fairy"],
-        height: 8,
-        weight: 60,
-        hp: 120,
-        attack: 95,
-        defense: 90,
-        speed: 130,
-      };
-      return [...details, customEntry];
+      return details;
     },
     staleTime: Infinity,
   });
