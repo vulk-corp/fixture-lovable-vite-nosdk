@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { fetchPokemon, fetchPokemonList, PokemonData } from "@/lib/pokemon-api";
 import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonDetail } from "@/components/PokemonDetail";
-import { Footer } from "@/components/Footer";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -207,7 +206,6 @@ export default function Index() {
         onClose={() => setSelected(null)}
       />
 
-      <Footer />
     </div>
   );
 }
