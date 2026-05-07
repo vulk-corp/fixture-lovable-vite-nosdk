@@ -5,7 +5,7 @@
     "": {
       "name": "vite_react_shadcn_ts",
       "dependencies": {
-        "@bworlds/launchkit": "^1.8.1",
+        "@bworlds/launchkit": "^1.9.0",
         "@hookform/resolvers": "^3.10.0",
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -95,7 +95,7 @@
 
     "@babel/runtime": ["@babel/runtime@7.28.2", "", {}, "sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA=="],
 
-    "@bworlds/launchkit": ["@bworlds/launchkit@1.8.1", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@bworlds/launchkit/-/launchkit-1.8.1.tgz", { "dependencies": { "rrweb": "2.0.0-alpha.18" } }, "sha512-xtDRng643CvPNKgXrXID/2nxDVQl+U6WwelGhXIx+UQRgW+gnAJYz4UlaVQ+EuUvmzs5f7LZa0cBFRi+P4oOrg=="],
+    "@bworlds/launchkit": ["@bworlds/launchkit@1.9.0", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@bworlds/launchkit/-/launchkit-1.9.0.tgz", { "dependencies": { "rrweb": "2.0.0-alpha.18" } }, "sha512-TBQUvc0mBgOg5IiaHPwzQUfHxYZUPRlx+exeb9i1tedEbnpUyHyNIoUKiga6gVL9cFmmgfOX0eVqwub7XH1UWw=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.25.0", "", { "os": "aix", "cpu": "ppc64" }, "sha512-O7vun9Sf8DFjH2UtqK8Ku3LkquL9SZL8OLY1T5NZkA34+wG3OQF7cl4Ql8vdNzM6fzBbYfLaiRLIOZ+2FOCgBQ=="],
 
