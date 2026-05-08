@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, BookOpen, Grid3X3, Shuffle } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,19 +8,10 @@ import { PokemonDetail } from "@/components/PokemonDetail";
 import { useSavedPokemon } from "@/hooks/use-saved-pokemon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-// @ts-ignore — named exports available in @bworlds/launchkit >=1.1.0
-import { check, getGateUrl } from "@bworlds/launchkit";
 
 type ViewMode = "all" | "saved";
 
 export default function Index() {
-  useEffect(() => {
-    check().then((session: any) => {
-      if (!session.valid) {
-        window.location.href = getGateUrl();
-      }
-    });
-  }, []);
 
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<PokemonData | null>(null);
